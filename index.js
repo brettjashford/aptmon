@@ -1,22 +1,31 @@
 require('dotenv').config()
 const {CronJob} = require('cron');
 const Hue = require('./lib/hue');
-const {info, success, inspect} = require('./lib/log');
+const {info, success, inspect, error} = require('./lib/log');
 
 (async () => {
     const hue = new Hue();
-    await hue.init();
-    const temps = await hue.getTemps();
-    inspect(temps);
+    try {
+        await hue.init();
+    } catch (e) {
+        error(`initialization error: ${e.message}`)
+    }
 
-    // const job = new CronJob({
-    //     cronTime: '* * * * * *',
-    //     start: false,
-    //     timeZone: 'America/New_York',
-    //     onTick() {
-    //
-    //     }
-    // });
-    // job.start();
+    const onTick = async () => {
+        try {
+            const temps = await hue.getTemps();
+            inspect(temps);
+        } catch (e) {
+            error(`onTick error: ${e.message}`)
+        }
+    };
 
+    const cronTime = process.env.CRON_TIME;
+    info(`starting cron: ${cronTime}`);
+    new CronJob({
+        start: true,
+        timeZone: 'America/New_York',
+        cronTime,
+        onTick
+    });
 })();
