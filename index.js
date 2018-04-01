@@ -19,13 +19,14 @@ const {info, success, inspect, error} = require('./lib/log');
             error(`onTick error: ${e.message}`)
         }
     };
+    onTick();
 
-    const cronTime = process.env.CRON_TIME;
-    info(`starting cron: ${cronTime}`);
-    new CronJob({
-        start: true,
-        timeZone: 'America/New_York',
-        cronTime,
-        onTick
-    });
+    // const cronTime = process.env.CRON_TIME;
+    // info(`starting cron: ${cronTime}`);
+    // new CronJob({
+    //     start: true,
+    //     timeZone: 'America/New_York',
+    //     cronTime,
+    //     onTick
+    // });
 })();

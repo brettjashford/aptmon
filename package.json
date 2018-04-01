@@ -1,7 +1,7 @@
 {
-  "name": "aptmon",
+  "name": "aptmon-agent",
   "version": "1.0.0",
-  "description": "apartment monitor",
+  "description": "apartment monitor agent",
   "main": "index.js",
   "author": "Brett Ashford <brettjashford@gmail.com>",
   "license": "MIT",
