@@ -12,6 +12,7 @@
     "dotenv": "^5.0.1",
     "huejay": "^1.8.0",
     "lodash.get": "^4.4.2",
-    "lodash.pick": "^4.4.0"
+    "lodash.pick": "^4.4.0",
+    "node-fetch": "^2.1.2"
   }
 }
