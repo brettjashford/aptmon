@@ -7,6 +7,7 @@ const getWeather = require('./lib/getWeather');
 
 (async () => {
     const hue = new Hue();
+    let ticks = 0;
     try {
         await hue.init();
     } catch (e) {
@@ -24,7 +25,7 @@ const getWeather = require('./lib/getWeather');
             info('saving aptMonData to server');
             inspect(aptMonData);
             saveTemps(aptMonData);
-            success('tick complete');
+            success(`tick complete (${++ticks})`);
         } catch (e) {
             error(`onTick error: ${e.message}`)
             error(e.stack);
@@ -32,7 +33,7 @@ const getWeather = require('./lib/getWeather');
     };
 
     const cronTime = process.env.CRON_TIME;
-    info(`starting cron: ${cronTime}`);
+    info(`starting cron (${cronTime})`);
     new CronJob({
         start: true,
         timeZone: 'America/New_York',
